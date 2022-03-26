@@ -9,39 +9,7 @@
     padding: 10px;" action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
-        {{ form.login_email(class="form-control", type="email", placeholder="login/email") }}
-        {% for error in form.login_email.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.password(class="form-control", type="password", placeholder="password") }}
-        {% for error in form.password.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.repeat_password(class="form-control", type="password", placeholder="repeat password") }}
-        {% for error in form.repeat_password.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.surname(class="form-control", type="surname", placeholder="surname") }}
-        {% for error in form.surname.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.name(class="form-control", type="name", placeholder="name") }}
+        {{ form.name(class="form-control", type="name", placeholder="Имя") }}
         {% for error in form.name.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
@@ -49,31 +17,31 @@
     {% endfor %}
     </p>
     <p>
-        {{ form.age(class="form-control", type="age", placeholder="age") }}
-        {% for error in form.age.errors %}
+        {{ form.surname(class="form-control", type="surname", placeholder="Фамилия") }}
+        {% for error in form.surname.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
     {% endfor %}
     </p>
     <p>
-        {{ form.position(class="form-control", placeholder="position") }}
-        {% for error in form.position.errors %}
+        {{ form.phone_number(class="form-control", placeholder="Номер телефона") }}
+        {% for error in form.phone_number.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
     {% endfor %}
     </p>
     <p>
-        {{ form.speciality(class="form-control", placeholder="speciality") }}
-        {% for error in form.speciality.errors %}
+        {{ form.password(class="form-control", type="password", placeholder="Пароль") }}
+        {% for error in form.password.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
     {% endfor %}
     </p>
     <p>
-        {{ form.address(class="form-control", placeholder="address") }}
+        {{ form.address(class="form-control", type="address", placeholder="Адрес") }}
         {% for error in form.address.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}

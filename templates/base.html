@@ -13,9 +13,13 @@
 <body>
 <header>
 <div id="header">
-    <p class="title"><a class="title" href="/">название</a></p>
-    <p class="title"><a href="authorization" class="title">войти</a>
+    <p class="title"><a class="title" href="/">FINDER</a></p>
+    {% if not user %}
+    <p class="title"><a href="log_in" class="title">войти</a>
         / <a href="register" class="title">регистрация</a></p>
+    {% else %}
+    <p class="user_name"><a href="" class="title">{{ user[0].name }} {{ user[0].surname }}</a></p>
+    {% endif %}
 </div>
 </header>
 <!-- Begin page content -->

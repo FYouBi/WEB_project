@@ -32,20 +32,15 @@ class LoadPhoto(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    login_email = StringField('login/email', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
-    repeat_password = StringField('repeat password', validators=[DataRequired()])
-    surname = StringField('surname', validators=[DataRequired()])
-    name = StringField('name', validators=[DataRequired()])
-    age = StringField('age', validators=[DataRequired()])
-    position = StringField('position', validators=[DataRequired()])
-    speciality = StringField('speciality', validators=[DataRequired()])
-    address = StringField('address', validators=[DataRequired()])
+    name = StringField('Имя', validators=[DataRequired()])
+    surname = StringField('Фамилия', validators=[DataRequired()])
+    phone_number = StringField('Номер телефона', validators=[DataRequired()])
+    password = StringField('Пароль', validators=[DataRequired()])
+    address = StringField('Адрес', validators=[DataRequired()])
     submit = SubmitField('Войти')
 
 
 class LoginForm(FlaskForm):
-    email = EmailField('Email', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember me')
-    submit = SubmitField('Sign in')
+    phone_number = EmailField('Номер телефона', validators=[DataRequired()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
+    submit = SubmitField('Войти')
