@@ -56,6 +56,22 @@ def base():
 if __name__ == '__main__':
     db_session.global_init('db/users.db')
     session = db_session.create_session()
-    list_of_ad = [['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS']]
+    list_of_ad = [['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS']
+                  ]
     USER = None
     app.run(port=8080, host='127.0.0.1')

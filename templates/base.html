@@ -12,15 +12,30 @@
 </head>
 <body>
 <header>
-<div id="header">
-    <p class="title"><a class="title" href="/">FINDER</a></p>
-    {% if not user %}
-    <p class="title"><a href="log_in" class="title">войти</a>
-        / <a href="register" class="title">регистрация</a></p>
-    {% else %}
-    <p class="user_name"><a href="" class="title">{{ user[0].name }} {{ user[0].surname }}</a></p>
-    {% endif %}
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed; width: 100%;">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="navbar-brand" href="/" style="margin-left: 120px;">FINDER</a>
+          </li>
+        {% if not user %}
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="log_in" style="margin-top: 5px; margin-left: 1200px;">Войти</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="register" style="margin-top: 5px;">Регистрация</a>
+        </li>
+        {% else %}
+          <li class="nav-item">
+              <a class="nav-link active" href="register" style="margin-top: 2px; margin-left: 1000px; font-size: 18px;">{{user[0].name}} {{user[0].surname}}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
 </header>
 <!-- Begin page content -->
 <main role="main" class="container">
