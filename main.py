@@ -44,7 +44,10 @@ def authorization():
 
 @app.route('/')
 def base():
-    return render_template('base.html')
+    list_of_ad = [['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
+                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS']]
+    return render_template('essential.html', list_of_ad=list_of_ad)
 
 
 if __name__ == '__main__':

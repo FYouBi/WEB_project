@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="" method="post" novalidate>
+<form style="margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 550px;
+    background-color: #FFFFFF;
+    padding: 10px;" action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     {% for item in list %}
       <p>{{ item.label }}</p>

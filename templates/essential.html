@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style=" max-width: 1060px; margin-top: 100px; padding: 10px; margin-left: auto;
+             margin-right: auto; background-color: #ffffff; display: flex; flex-direction: row;
+             flex-wrap: wrap; justify-content: center;">
+    {% for img, name, address in list_of_ad %}
+    <div><a><img src={{img}} width="250" height="250" style="padding: 10px;"></a>
+      <p style="padding-left: 10px;">{{name}}</p>
+      <p style="padding-left: 10px;">{{address}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
