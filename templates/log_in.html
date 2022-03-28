@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form style="margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 550px;
+    background-color: #f5f5f5;
+    padding: 10px;" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {% for item in list %}
+      <p>{{ item.label }}</p>
+      <p>
+          {{ item(class="form-control") }}
+          {% for error in item.errors %}
+      <div class="alert alert-danger" role="alert">
+          {{ error }}
+      </div>
+      </p>
+      {% endfor %}
+    {% endfor %}
+    {% if message %}
+        <div class="alert alert-danger" role="alert">
+              {{ message }}
+          </div>
+    {% endif %}
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}
