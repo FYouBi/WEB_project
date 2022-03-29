@@ -33,7 +33,7 @@ class LoadPhoto(FlaskForm):
 
 class RegisterForm(FlaskForm):
     name = StringField('Имя', validators=[DataRequired()])
-    surname = StringField('Фамилия', validators=[DataRequired()])
+    # surname = StringField('Фамилия', validators=[DataRequired()])
     phone_number = StringField('Номер телефона', validators=[DataRequired()])
     password = StringField('Пароль', validators=[DataRequired()])
     address = StringField('Адрес', validators=[DataRequired()])

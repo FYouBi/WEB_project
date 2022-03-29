@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import datetime
-from data.ads import Jobs
+from data.ads import Ads
 from forms import LoginForm, Protection, LoadPhoto, RegisterForm
 from data import db_session
 from data.users import User
@@ -16,8 +16,10 @@ def register():
     if form.validate_on_submit():
         data = form.data
         print(data)
-        new_user = User(surname=data['surname'],
-                        name=data['name'],
+        if [user for user in session.query(User).filter(User.phone_number == data['phone_number'])]:
+            return render_template('register.html', title='Авторизация', form=form,
+                                   message='Данный номер телефона уже зарегистрирован')
+        new_user = User(name=data['name'].capitalize(),
                         phone_number=data['phone_number'],
                         password=data['password'],
                         address=data['address'])
@@ -25,7 +27,7 @@ def register():
         USER = [user for user in session.query(User).filter(User.phone_number == data['phone_number'])]
         session.commit()
         return render_template('essential.html', list_of_ad=list_of_ad, user=USER)
-    return render_template('register.html', title='Авторизация', form=form)
+    return render_template('register.html', title='Авторизация', form=form, message='')
 
 
 @app.route('/log_in', methods=['GET', 'POST'])
@@ -41,11 +43,11 @@ def log_in():
                     USER = [user for user in session.query(User).filter(User.phone_number == form.data['phone_number'])]
                     return render_template('essential.html', list_of_ad=list_of_ad, user=USER)
                 return render_template('log_in.html', title='log_in', message='Неверный пароль',
-                                       form=form, list=[form.phone_number, form.password])
+                                       form=form)
         return render_template('log_in.html', title='log_in', message='Неверный номер телефона',
-                               form=form, list=[form.phone_number, form.password])
+                               form=form)
     return render_template('log_in.html', title='log_in', message='',
-                           form=form, list=[form.phone_number, form.password])
+                           form=form)
 
 
 @app.route('/')
