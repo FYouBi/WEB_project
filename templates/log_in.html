@@ -1,19 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form id="register" action="" method="post" novalidate>
+<form id="log-in" action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <h3 style="text-align: center;">Регистрация</h3>
+    <h3 style="text-align: center;">Вход</h3>
     <p>
-        {{ form.name(class="form-control", type="name", placeholder="Имя") }}
-        {% for error in form.name.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.phone_number(class="form-control", placeholder="Номер телефона") }}
+        {{ form.phone_number(class="form-control", type="phone_number", placeholder="Номер телефона") }}
         {% for error in form.phone_number.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
@@ -23,14 +15,6 @@
     <p>
         {{ form.password(class="form-control", type="password", placeholder="Пароль") }}
         {% for error in form.password.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.address(class="form-control", type="address", placeholder="Округ/Регион") }}
-        {% for error in form.address.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
