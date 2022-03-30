@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style=" max-width: 1090px; margin-top: 100px; padding: 10px; margin-left: auto;
-             margin-right: auto; display: flex; flex-direction: row;
-             flex-wrap: wrap; justify-content: space-evenly;" xmlns="http://www.w3.org/1999/html">
+<div id="essential" xmlns="http://www.w3.org/1999/html">
     {% for img, name, address in list_of_ad %}
     <div>
         <div style="background-color: #ffffff; border: solid; border-color: #ffffff; border-radius: 10px;">
-          <a href="#"><img src={{img}} width="250" height="250" style="padding: 10px;"></a>
+          <a href="#"><img src={{img}} width="250" height="250" style="padding: 2px; border: solid; border-color: #ffffff; border-radius: 20px;"></a>
           <p style="padding-left: 10px;">{{name}}</p>
           <p style="padding-left: 10px;">{{address}}</p>
         </div>
