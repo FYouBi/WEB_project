@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 import datetime
 from data.ads import Ads
-from forms import LoginForm, Protection, LoadPhoto, RegisterForm
+from forms import LoginForm, RegisterForm
 from data import db_session
 from data.users import User
 

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="shortcut icon" href="static/img/icon_finder.png"/>
     <title>Finder</title>
@@ -23,7 +23,7 @@
           </li>
         {% if not user %}
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="log_in" style="margin-top: 3px; margin-left: 735px;">Войти</a>
+          <a class="nav-link" aria-current="page" href="log_in" style="margin-top: 3px; margin-left: 755px;">Войти</a>
         </li>
 
         <li class="nav-item">
@@ -35,7 +35,7 @@
               <a class="nav-link active" href="register" style="margin-top: 3px; margin-left: 750px; font-size: 18px;">{{user[0].name}} {{user[0].surname}}</a>
           </li>
         {% endif %}
-         <li style="margin-top: 12px; margin-left: 4px;">
+         <li style="margin-top: 12px; margin-left: 44px;">
            <div class="btn btn-primary">
                <a href="register" style="margin-top: 3px; color: #ffffff; text-decoration: none;">Разместить объявление</a>
            </div>

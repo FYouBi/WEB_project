@@ -13,4 +13,4 @@ class User(SqlAlchemyBase):
     phone_number = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     address = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    # ads = orm.relation("Ads", back_populates='user')
+    ads = orm.relation("Ads", back_populates='user')
