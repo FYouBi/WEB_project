@@ -44,3 +44,10 @@ class LoginForm(FlaskForm):
     phone_number = EmailField('Номер телефона', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     submit = SubmitField('Войти')
+
+
+class CreateAd(FlaskForm):
+    image = FileField('Приложите фотографию', validators=[DataRequired()])
+    name = StringField('Название', validators=[DataRequired()])
+    description = TextAreaField('Описание', validators=[DataRequired()])
+    submit = SubmitField('Разместить')

@@ -32,12 +32,12 @@
 
         {% else %}
           <li class="nav-item">
-              <a class="nav-link active" href="register" style="margin-top: 3px; margin-left: 750px; font-size: 18px;">{{user[0].name}} {{user[0].surname}}</a>
+              <a class="nav-link active" href="/" style="margin-top: 3px; margin-left: 750px; font-size: 18px;">{{user.name}}</a>
           </li>
         {% endif %}
          <li style="margin-top: 12px; margin-left: 44px;">
            <div class="btn btn-primary">
-               <a href="register" style="margin-top: 3px; color: #ffffff; text-decoration: none;">Разместить объявление</a>
+               <a href="create_ad" style="margin-top: 3px; color: #ffffff; text-decoration: none;">Разместить объявление</a>
            </div>
         </li>
       </ul>
