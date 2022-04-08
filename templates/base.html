@@ -30,16 +30,23 @@
           <a class="nav-link" href="register" style="margin-top: 3px;">Регистрация</a>
         </li>
 
+         <li style="margin-top: 12px; margin-left: 44px;">
+           <div class="btn btn-primary">
+               <a href="register" style="margin-top: 3px; color: #ffffff; text-decoration: none;">Разместить объявление</a>
+           </div>
+         </li>
+
         {% else %}
           <li class="nav-item">
               <a class="nav-link active" href="/" style="margin-top: 3px; margin-left: 750px; font-size: 18px;">{{user.name}}</a>
           </li>
-        {% endif %}
-         <li style="margin-top: 12px; margin-left: 44px;">
+
+          <li style="margin-top: 12px; margin-left: 44px;">
            <div class="btn btn-primary">
                <a href="create_ad" style="margin-top: 3px; color: #ffffff; text-decoration: none;">Разместить объявление</a>
            </div>
-        </li>
+           </li>
+        {% endif %}
       </ul>
     </div>
   </div>

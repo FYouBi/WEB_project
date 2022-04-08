@@ -18,16 +18,11 @@ def check_password(data):
         return 'Недопустимые символы'
     elif len(data) > 30:
         return 'Слишком много символов(Нужно меньше 30)'
-    elif data.isupper():
-        return 'Нужны символы в нижнем регистре'
     elif data.isdigit():
         return 'Нужны буквы'
     elif data.isalpha():
         return 'Нужны цифры'
-    for i in data:
-        if i.isupper():
-            return True
-    return 'Нужны символы в верхнем регистре'
+    return True
 
 
 def check_phone(data):
@@ -65,7 +60,7 @@ def register():
         session.add(new_user)
         USER = [user for user in session.query(User).filter(User.phone_number == data['phone_number'])][0]
         session.commit()
-        return render_template('essential.html', list_of_ad=list_of_ad, user=USER)
+        return render_template('essential.html', list_of_ad=update_list(), user=USER)
     return render_template('register.html', title='Авторизация', form=form, message='')
 
 
@@ -80,7 +75,7 @@ def log_in():
             if str(user.phone_number) == phone_number:
                 if user.password == password:
                     USER = [user for user in session.query(User).filter(User.phone_number == form.data['phone_number'])]
-                    return render_template('essential.html', list_of_ad=list_of_ad, user=USER)
+                    return render_template('essential.html', list_of_ad=update_list(), user=USER)
                 return render_template('log_in.html', title='log_in', message='Неверный пароль',
                                        form=form)
         return render_template('log_in.html', title='log_in', message='Неверный номер телефона',
@@ -96,35 +91,31 @@ def create_ad():
         new_ad = Ads(image=form.data['image'], name=form.data['name'], description=form.data['description'], user=USER)
         session.add(new_ad)
         session.commit()
-        return 'ok'
+        return render_template('essential.html', list_of_ad=update_list(), user=USER)
     return render_template('create_ad.html', form=form, user=USER)
+
+
+@app.route('/view_ad', methods=['GET', 'POST'])
+def view_ad():
+    pass
 
 
 @app.route('/')
 def base():
-    return render_template('essential.html', list_of_ad=list_of_ad, user=USER)
+    return render_template('essential.html', list_of_ad=update_list(), user=USER)
+
+
+def update_list():
+    list_of_ad = []
+    for ad in session.query(Ads).all():
+        list_of_ad.append([ad.id, ad.image, ad.name, ad.user.address, ad.user])
+        print([ad.id, ad.image, ad.name, ad.user.address, ad.user])
+    return list_of_ad
 
 
 if __name__ == '__main__':
     db_session.global_init('db/users.db')
     session = db_session.create_session()
-    list_of_ad = [['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS'],
-                  ['static/img/img.png', 'NAME', 'ADDRESS'], ['static/img/img.png', 'NAME', 'ADDRESS']]
-    for ad in session.query(Ads).all():
-        print([ad.image, ad.name, ad.user.address, ad.user])
+    update_list()
     USER = None
     app.run(port=8080, host='127.0.0.1')
