@@ -60,7 +60,7 @@ def register():
         session.add(new_user)
         USER = [user for user in session.query(User).filter(User.phone_number == data['phone_number'])][0]
         session.commit()
-        return render_template('essential.html', list_of_ad=update_list(), user=USER)
+        return redirect('/')
     return render_template('register.html', title='Авторизация', form=form, message='')
 
 
@@ -75,7 +75,7 @@ def log_in():
             if str(user.phone_number) == phone_number:
                 if user.password == password:
                     USER = [user for user in session.query(User).filter(User.phone_number == form.data['phone_number'])]
-                    return render_template('essential.html', list_of_ad=update_list(), user=USER)
+                    return redirect('/')
                 return render_template('log_in.html', title='log_in', message='Неверный пароль',
                                        form=form)
         return render_template('log_in.html', title='log_in', message='Неверный номер телефона',
@@ -91,7 +91,7 @@ def create_ad():
         new_ad = Ads(image=form.data['image'], name=form.data['name'], description=form.data['description'], user=USER)
         session.add(new_ad)
         session.commit()
-        return render_template('essential.html', list_of_ad=update_list(), user=USER)
+        return redirect('/')
     return render_template('create_ad.html', form=form, user=USER)
 
 
