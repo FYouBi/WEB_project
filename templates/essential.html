@@ -5,7 +5,7 @@
     {% for id, img, name, address, user in list_of_ad %}
     <div>
         <div style="background-color: #ffffff; border: solid; border-color: #ffffff; border-radius: 10px;">
-          <a href="view_ad"><img src='static/img/{{img}}' width="250" height="250" style="padding: 2px; border: solid; border-color: #ffffff; border-radius: 20px;"></a>
+          <a href="view_ad/{{id}}"><img src='static/img/{{img}}' width="250" height="250" style="padding: 2px; border: solid; border-color: #ffffff; border-radius: 20px;"></a>
           <p style="padding-left: 10px;">{{name}}</p>
           <p style="padding-left: 10px;">{{address}}</p>
         </div>

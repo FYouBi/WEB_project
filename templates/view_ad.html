@@ -1,17 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div id="essential" xmlns="http://www.w3.org/1999/html">
-    {% for id, img, name, address in list_of_ad %}
-    <div>
-        <div style="background-color: #ffffff; border: solid; border-color: #ffffff; border-radius: 10px;">
-          <a href="#"><img src='static/img/{{img}}' width="250" height="250" style="padding: 2px; border: solid; border-color: #ffffff; border-radius: 20px;"></a>
-          <p style="padding-left: 10px;">{{name}}</p>
-          <p style="padding-left: 10px;">{{address}}</p>
-        </div>
-        <p><p>
-     </div>
-    {% endfor %}
-
+<div style="max-width: 1090px;
+            margin-top: 200px;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;" xmlns="http://www.w3.org/1999/html">
+    <img src="/static/img/{{img}}" width="350" height="350">
 </div>
 {% endblock %}

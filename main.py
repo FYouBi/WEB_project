@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, redirect, request
 import datetime
 from data.ads import Ads
 from forms import LoginForm, RegisterForm, CreateAd
@@ -42,7 +42,6 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         data = form.data
-        print(data)
 
         if [user for user in session.query(User).filter(User.phone_number == data['phone_number'])]:
             return render_template('register.html', title='Авторизация', form=form,
@@ -88,16 +87,21 @@ def log_in():
 def create_ad():
     form = CreateAd()
     if form.validate_on_submit():
-        new_ad = Ads(image=form.data['image'], name=form.data['name'], description=form.data['description'], user=USER)
+        f = request.files['file']
+        with open(f'static/{f.filename}', 'wb') as file:
+            file.write(f.read())
+        file = url_for('static', filename=f'{f.filename}')
+        new_ad = Ads(image=file, name=form.data['name'], description=form.data['description'], user=USER)
         session.add(new_ad)
         session.commit()
         return redirect('/')
     return render_template('create_ad.html', form=form, user=USER)
 
 
-@app.route('/view_ad', methods=['GET', 'POST'])
-def view_ad():
-    pass
+@app.route('/view_ad/<int:id>')
+def view_ad(id):
+    ad = list_of_ad[id - 1]
+    return render_template('view_ad.html', img=ad[1])
 
 
 @app.route('/')
@@ -106,6 +110,7 @@ def base():
 
 
 def update_list():
+    global list_of_ad
     list_of_ad = []
     for ad in session.query(Ads).all():
         list_of_ad.append([ad.id, ad.image, ad.name, ad.user.address, ad.user])
@@ -116,6 +121,7 @@ def update_list():
 if __name__ == '__main__':
     db_session.global_init('db/users.db')
     session = db_session.create_session()
+    list_of_ad = []
     update_list()
     USER = None
     app.run(port=8080, host='127.0.0.1')

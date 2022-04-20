@@ -45,3 +45,11 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+#view-ad {
+    max-width: 1090px;
+    margin-top: 100px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
