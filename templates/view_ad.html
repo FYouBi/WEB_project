@@ -1,11 +1,29 @@
 {% extends "base.html" %}
 
+{% block selector %}
+<li style="margin-left:606px; margin-top:12px">
+    <p> </p>
+</li>
+{% endblock %}
+
 {% block content %}
-<div style="max-width: 1090px;
+<div style="max-width: 690px;
+            max-height: 350px;
             margin-top: 200px;
             padding: 10px;
-            margin-left: auto;
-            margin-right: auto;" xmlns="http://www.w3.org/1999/html">
-    <img src="/static/img/{{img}}" width="350" height="350">
+            margin-left: 300;
+            margin-right: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;" xmlns="http://www.w3.org/1999/html">
+    <img src="/static/img/{{img}}" width="350" height="350" style="padding: 2px; border-radius: 20px;">
+    <div style="align-self: center;">
+        <h1>{{ name }}</h1><br>
+        <h4>Описание: <br> {{ description }}</h4><br>
+        <h4>{{ author.name }}</h4>
+        <h4>{{ author.phone_number }}</h4>
+        <h4>{{ author.address }}</h4>
+    </div>
+
 </div>
 {% endblock %}

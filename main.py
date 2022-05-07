@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for, redirect, request
 import datetime
+
+from werkzeug.datastructures import CombinedMultiDict
 from data.ads import Ads
-from forms import LoginForm, RegisterForm, CreateAd
+from forms import LoginForm, RegisterForm, CreateAd, List
 from data import db_session
 from data.users import User
 
@@ -68,12 +70,13 @@ def log_in():
     global USER
     form = LoginForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
         phone_number, password = form.data['phone_number'], form.data['password']
-        for user in db_sess.query(User).all():
+        for user in session.query(User).all():
             if str(user.phone_number) == phone_number:
                 if user.password == password:
-                    USER = [user for user in session.query(User).filter(User.phone_number == form.data['phone_number'])]
+                    USER = \
+                        [user for user in session.query(User).filter(User.phone_number == form.data['phone_number'])][0]
+                    session.commit()
                     return redirect('/')
                 return render_template('log_in.html', title='log_in', message='Неверный пароль',
                                        form=form)
@@ -87,11 +90,9 @@ def log_in():
 def create_ad():
     form = CreateAd()
     if form.validate_on_submit():
-        f = request.files['file']
-        with open(f'static/{f.filename}', 'wb') as file:
-            file.write(f.read())
-        file = url_for('static', filename=f'{f.filename}')
-        new_ad = Ads(image=file, name=form.data['name'], description=form.data['description'], user=USER)
+        file = form.image.data
+        new_ad = Ads(image=file, name=form.data['name'], description=form.data['description'],
+                     type=form.select.data, user=USER)
         session.add(new_ad)
         session.commit()
         return redirect('/')
@@ -101,20 +102,29 @@ def create_ad():
 @app.route('/view_ad/<int:id>')
 def view_ad(id):
     ad = list_of_ad[id - 1]
-    return render_template('view_ad.html', img=ad[1])
+    return render_template('view_ad.html', img=ad[1], name=ad[2], description=ad[3], author=ad[5])
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def base():
-    return render_template('essential.html', list_of_ad=update_list(), user=USER)
+    form = List()
+    k = 'all'
+    if form.validate_on_submit():
+        print(form.select.data)
+        k = form.select.data
+    list_of_ad = update_list(k)
+    return render_template('essential.html', list_of_ad=list_of_ad, user=USER, form=form)
 
 
-def update_list():
+def update_list(k):
     global list_of_ad
     list_of_ad = []
-    for ad in session.query(Ads).all():
-        list_of_ad.append([ad.id, ad.image, ad.name, ad.user.address, ad.user])
-        print([ad.id, ad.image, ad.name, ad.user.address, ad.user])
+    if k != 'all':
+        for ad in session.query(Ads).filter(Ads.type == k):
+            list_of_ad.append([ad.id, ad.image, ad.name, ad.description, ad.user.address, ad.user])
+    else:
+        for ad in session.query(Ads).all():
+            list_of_ad.append([ad.id, ad.image, ad.name, ad.description, ad.user.address, ad.user])
     return list_of_ad
 
 
@@ -122,6 +132,6 @@ if __name__ == '__main__':
     db_session.global_init('db/users.db')
     session = db_session.create_session()
     list_of_ad = []
-    update_list()
+    update_list('all')
     USER = None
     app.run(port=8080, host='127.0.0.1')

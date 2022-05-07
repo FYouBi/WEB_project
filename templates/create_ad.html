@@ -32,6 +32,14 @@
               {{ message }}
           </div>
     {% endif %}
+    <p>
+        {{ form.select(class="form-control") }}
+        {% for error in form.select.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
     <a href="/">{{ form.submit(type="submit", class="btn btn-primary") }}</a>
 </form>
 {% endblock %}

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed
 from wtforms import StringField, BooleanField, SubmitField, TextAreaField, \
     RadioField, SelectField, PasswordField, FileField, EmailField
 from wtforms.validators import DataRequired
@@ -47,7 +48,17 @@ class LoginForm(FlaskForm):
 
 
 class CreateAd(FlaskForm):
-    image = FileField('Приложите фотографию', validators=[DataRequired()])
+    image = FileField('Приложите фотографию', validators=[DataRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
     name = StringField('Название', validators=[DataRequired()])
     description = TextAreaField('Описание', validators=[DataRequired()])
+    select = SelectField('Название', choices=[('doc', 'Документы'),
+                                              ('animal', 'Животные'), ('technical', 'Техника'),
+                                              ('other', 'Другое')])
     submit = SubmitField('Разместить')
+
+
+class List(FlaskForm):
+    select = SelectField('Название', choices=[('all', 'Всё'), ('doc', 'Документы'),
+                                              ('animal', 'Животные'), ('technical', 'Техника'),
+                                              ('other', 'Другое')])
+    submit = SubmitField('Поиск')

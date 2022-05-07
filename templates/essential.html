@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
+{% block selector %}
+<li style="margin-left:400px; margin-top:12px">
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.select(style="border: solid; border-color: white; border-radius: 10px;") }}
+    {{ form.submit(type="submit", class="btn btn-outline-light") }}
+</form>
+</li>
+{% endblock %}
+
 {% block content %}
 <div id="essential" xmlns="http://www.w3.org/1999/html">
-    {% for id, img, name, address, user in list_of_ad %}
+    {% for id, img, name, description, address, user in list_of_ad %}
     <div>
-        <div style="background-color: #ffffff; border: solid; border-color: #ffffff; border-radius: 10px;">
+        <div id="shadow-block" style="">
           <a href="view_ad/{{id}}"><img src='static/img/{{img}}' width="250" height="250" style="padding: 2px; border: solid; border-color: #ffffff; border-radius: 20px;"></a>
           <p style="padding-left: 10px;">{{name}}</p>
           <p style="padding-left: 10px;">{{address}}</p>
