@@ -1,6 +1,7 @@
+import flask
 from flask import Flask, render_template, url_for, redirect, request
 import datetime
-
+import user_api
 from werkzeug.datastructures import CombinedMultiDict
 from data.ads import Ads
 from forms import LoginForm, RegisterForm, CreateAd, List
@@ -44,7 +45,6 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         data = form.data
-
         if [user for user in session.query(User).filter(User.phone_number == data['phone_number'])]:
             return render_template('register.html', title='Авторизация', form=form,
                                    message='Данный номер телефона уже зарегистрирован')
@@ -131,6 +131,7 @@ def update_list(k):
 if __name__ == '__main__':
     db_session.global_init('db/users.db')
     session = db_session.create_session()
+    app.register_blueprint(user_api.blueprint)
     list_of_ad = []
     update_list('all')
     USER = None
